@@ -31,7 +31,6 @@
 export default {
   data () {
     return {
-      a: 80000,
       list: [
         { name: '商品1', time: 60000 },
         { name: '商品2', time: 120000 },
