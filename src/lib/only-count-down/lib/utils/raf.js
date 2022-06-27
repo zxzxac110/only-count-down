@@ -1,14 +1,35 @@
+import { requestAnimationFrameTimer } from './createTimer.js'
+
 var prev = Date.now()
 var root = window || global
-var iRaf = root.requestAnimationFrame || fallback
-var iCancel = root.cancelAnimationFrame || root.clearTimeout
 
+// vant
+// var iRaf = root.requestAnimationFrame || fallback
+// var iCancel = root.cancelAnimationFrame || root.clearTimeout
+// my
+var timeList = []
+var iRaf = fallback
+var iCancel = stop
 function fallback (fn) {
   var curr = Date.now()
   var ms = Math.max(0, 16 - (curr - prev))
-  var id = setTimeout(fn, ms)
+  // vant
+  // var id = setTimeout(fn, ms)
   prev = curr + ms
+  // my
+  var id = fn
+  if (timeList.indexOf(fn) === -1) {
+    debugger
+    requestAnimationFrameTimer.on(fn, 0)
+    timeList.push(fn)
+  }
   return id
+}
+function stop (fn) {
+  if (timeList.indexOf(fn) > -1) {
+    timeList.splice(timeList.indexOf(fn), 1)
+  }
+  requestAnimationFrameTimer.off(fn)
 }
 
 function raf (fn) {

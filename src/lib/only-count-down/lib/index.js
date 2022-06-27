@@ -1,5 +1,5 @@
 import onlyCountDown from './index.vue'
-import Timer from './utils/time.js'
+import createTimer from './utils/createTimer.js'
 
 const myPlugin = {
   // 该插件有一个install方法
@@ -7,14 +7,12 @@ const myPlugin = {
   install (Vue, options) {
     // 将其注册为组件
     Vue.component('onlyCountDown', onlyCountDown)
-    var createTimer = new Timer()
-    createTimer.start()
     Vue.prototype.$onlyCountDown = {
-      create: function (option) { createTimer = new Timer(option) },
-      start: (...data) => createTimer.start(...data),
-      stop: (...data) => createTimer.stop(...data),
-      on: (...data) => createTimer.on(...data),
-      off: (...data) => createTimer.off(...data)
+      create: (...data) => createTimer.create(...data),
+      start: () => createTimer.start(),
+      stop: () => createTimer.stop(),
+      on: (cb, step) => createTimer.on(cb, step),
+      off: (key) => createTimer.off(key)
     }
   }
 }

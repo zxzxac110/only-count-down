@@ -14,7 +14,7 @@ class Timer {
       this._time += this._option.ms
       this._listeners.forEach(e => {
         try {
-          if (!(this._time % e.step)) {
+          if (!(this._time % (e.step || this._time))) {
             (async () => e.cb && e.cb())()
           }
         } catch (e) {

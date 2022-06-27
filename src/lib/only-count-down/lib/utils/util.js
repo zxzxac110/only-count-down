@@ -66,8 +66,6 @@ function parseFormat (format, timeData) {
     if (format.indexOf('SSS') !== -1) {
       format = format.replace('SSS', ms)
     } else if (format.indexOf('SS') !== -1) {
-      console.log(format)
-
       format = format.replace('SS', ms.slice(0, 2))
     } else {
       format = format.replace('S', ms.charAt(0))

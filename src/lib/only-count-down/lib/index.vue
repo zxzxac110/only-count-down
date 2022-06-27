@@ -59,7 +59,6 @@ export default {
     }
   },
   beforeDestroy () {
-    console.log('销毁')
     this.pause()
   },
   methods: {
@@ -76,16 +75,13 @@ export default {
       this.rafId && cancelRaf(this.rafId)
     },
     reset () { // 刷新
-      console.log('刷新')
       this.pause()
       this.remain = +this.time
-      console.log(this.remain)
       if (this.autoStart) {
         this.start()
       }
     },
     tick () { // 一次任务
-      console.log('开始一次任务')
       if (this.millisecond) {
         this.microTick()
       } else {
@@ -93,36 +89,36 @@ export default {
       }
     },
     microTick () {
-      var _this = this
-      this.rafId = raf(function () {
-        if (!_this.counting) {
-          return
-        }
+      this.rafId = raf(this.microTick2)
+    },
+    microTick2 () {
+      if (!this.counting) {
+        return
+      }
 
-        _this.setRemain(_this.getRemain())
+      this.setRemain(this.getRemain())
 
-        if (_this.remain > 0) {
-          _this.microTick()
-        }
-      })
+      if (this.remain > 0) {
+        this.microTick()
+      }
     },
     macroTick () {
-      var _this2 = this
-      this.rafId = raf(function () {
-        if (!_this2.counting) {
-          return
-        }
+      this.rafId = raf(this.macroTick2)
+    },
+    macroTick2 () {
+      if (!this.counting) {
+        return
+      }
 
-        var remain = _this2.getRemain()
+      var remain = this.getRemain()
 
-        if (!isSameSecond(remain, _this2.remain) || remain === 0) {
-          _this2.setRemain(remain)
-        }
+      if (!isSameSecond(remain, this.remain) || remain === 0) {
+        this.setRemain(remain)
+      }
 
-        if (_this2.remain > 0) {
-          _this2.macroTick()
-        }
-      })
+      if (this.remain > 0) {
+        this.macroTick()
+      }
     },
     getRemain () {
       return Math.max(this.endTime - Date.now(), 0)
