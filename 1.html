@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="div" style="width:100px; height:100px; background-color:#000; position: absolute;left:0; top:0;">
+
+  </div>
+
+  <script type="text/javascript">
+
+  let divEle = document.getElementById("div");
+
+  const distance = 1500;
+  const timeCount = 3000;
+
+  function handler( time ) {
+      console.log(777)
+            window.requestAnimationFrame( handler );
+  }
+
+   window.requestAnimationFrame( handler );
+  </script>
+</body>
+</html>
