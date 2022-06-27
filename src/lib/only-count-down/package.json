@@ -1,6 +1,6 @@
 {
   "name": "only-count-down",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "全局定时器",
   "main": "index.js",
   "directories": {
