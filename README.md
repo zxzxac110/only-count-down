@@ -15,7 +15,7 @@ h5版本vant 使用
 
 大部分代码内容照搬的 `vant-count-down` 内容
 演示地址 <https://zxzxac110.github.io/only-count-down/dist/index.html#/>
-github地址 <https://github.com/zxzxac110/only-count-down.git>
+github地址 <https://github.com/zxzxac110/only-count-down>
 
 
 ## 使用
